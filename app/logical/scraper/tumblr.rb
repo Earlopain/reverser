@@ -6,6 +6,7 @@ module Scraper
   # You can then export your data and import the archive instead
   class Tumblr < Base
     STATE = :offset
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

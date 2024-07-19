@@ -5,6 +5,7 @@ module Scraper
   # https://www.deviantart.com/developers/console
   class Deviantart < Base
     STATE = :next_offset
+    REQUIRES_INTERACTION = true
     API_PREFIX = "https://www.deviantart.com/api/v1/oauth2"
 
     def initialize(artist_url)

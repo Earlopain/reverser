@@ -3,6 +3,7 @@
 module Scraper
   class Artstation < BufferedScraper
     STATE = :page
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

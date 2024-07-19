@@ -4,6 +4,7 @@ module Scraper
   # https://www.reddit.com/dev/api/
   class Reddit < Base
     STATE = :after
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

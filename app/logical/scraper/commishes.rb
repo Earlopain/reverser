@@ -3,6 +3,7 @@
 module Scraper
   class Commishes < BufferedScraper
     STATE = :until
+    REQUIRES_INTERACTION = true
 
     def initialize(artist_url)
       super

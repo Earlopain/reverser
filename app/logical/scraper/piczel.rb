@@ -3,6 +3,7 @@
 module Scraper
   class Piczel < Base
     STATE = :from_id
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

@@ -14,6 +14,7 @@ module Scraper
       super
       base.class_eval do
         const_set(:STATE, :max_id)
+        const_set(:REQUIRES_INTERACTION, false)
       end
     end
 

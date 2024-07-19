@@ -4,6 +4,7 @@ module Scraper
   # https://projects.weasyl.com/weasylapi/
   class Weasyl < Base
     STATE = :nextid
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

@@ -5,10 +5,13 @@ require "test_helper"
 module Scraper
   class BaseTest < ActiveSupport::TestCase
     Sites.scraper_definitions.each do |definition|
-      test "#{definition.site_type} has correct state" do
+      test "#{definition.site_type} has correct constants" do
         scraper = stub_scraper_enabled(definition.site_type) { definition.new_scraper(build(:artist_url)) }
+
         assert(scraper.class.const_defined?(:STATE))
         assert(scraper.instance_variable_defined?(:"@#{scraper.class::STATE}"))
+
+        assert(scraper.class.const_defined?(:REQUIRES_INTERACTION))
       end
     end
 
@@ -119,6 +122,29 @@ module Scraper
         @scraper.tokens
         @scraper.class.delete_cache(:tokens)
         @scraper.tokens
+      end
+    end
+
+    describe "auto update" do
+      test "a scraper without caching offers itself as auto updatable" do
+        assert_empty(Scraper::Artstation.cached_methods)
+        assert_predicate(Scraper::Artstation, :can_act_automatically?)
+      end
+
+      test "a scraper with caching doesn't offer itself as auto updatable" do
+        assert_not_empty(Scraper::Twitter.cached_methods)
+        assert_not_predicate(Scraper::Twitter, :can_act_automatically?)
+      end
+
+      test "a scraper with cached methods not expired offers itself as auto updatable" do
+        scraper = Scraper::Twitter.new(create(:artist_url))
+        scraper.stubs(:tokens_old).returns("value")
+        scraper.tokens
+
+        assert_predicate(Scraper::Twitter, :can_act_automatically?)
+        travel_to(1.hour.from_now) do
+          assert_not_predicate(Scraper::Twitter, :can_act_automatically?)
+        end
       end
     end
   end

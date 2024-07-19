@@ -128,6 +128,20 @@ module Scraper
       @_cached_methods || []
     end
 
+    def self.can_act_automatically?
+      return true unless self::REQUIRES_INTERACTION
+
+      # Otherwise, all the cached methods must not expire soonish
+      cached_methods.all? do |cached_method|
+        cache_entry = Rails.cache.send(:read_entry, Rails.cache.send(:normalize_key, cache_key(cached_method), {}))
+        break false unless cache_entry
+
+        expires_at = Time.zone.at(cache_entry.expires_at)
+        expires_at.after?(5.minutes.from_now)
+      end
+    end
+    delegate :can_act_automatically?, to: :class
+
     def end_reached
       @has_more = false
     end

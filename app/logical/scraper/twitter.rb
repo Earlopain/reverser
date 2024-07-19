@@ -7,6 +7,7 @@ module Scraper
 
     OPTIONAL_CONFIG_KEYS = %i[twitter_otp_secret].freeze
     STATE = :cursor
+    REQUIRES_INTERACTION = true
 
     BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
     DATETIME_FORMAT = "%a %b %d %H:%M:%S %z %Y"

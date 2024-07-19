@@ -3,6 +3,7 @@
 module Scraper
   class Bluesky < Base
     STATE = :cursor
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

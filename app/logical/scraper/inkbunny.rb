@@ -4,6 +4,7 @@ module Scraper
   # https://wiki.inkbunny.net/wiki/API
   class Inkbunny < Base
     STATE = :page
+    REQUIRES_INTERACTION = false
 
     def initialize(artist_url)
       super

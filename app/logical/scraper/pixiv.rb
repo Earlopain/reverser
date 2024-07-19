@@ -7,6 +7,7 @@ module Scraper
   # https://github.com/upbit/pixivpy/blob/master/pixivpy3/api.py
   class Pixiv < Base
     STATE = :offset
+    REQUIRES_INTERACTION = true
 
     API_BASE_URL = "https://app-api.pixiv.net/v1"
     LOGIN_URL = "https://app-api.pixiv.net/web/v1/login"

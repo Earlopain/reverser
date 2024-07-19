@@ -3,6 +3,7 @@
 module Scraper
   class Furaffinity < BufferedScraper
     STATE = :page
+    REQUIRES_INTERACTION = true
 
     def initialize(artist_url)
       super
